@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login — GEN-VISUAL</title>
+
+<style>
+:root{
+    --bg:#08090d;
+    --card:#12151e;
+    --card2:#171b27;
+    --text:#f5f7ff;
+    --muted:#9da5b8;
+    --primary:#8b5cf6;
+    --primary2:#6366f1;
+    --border:rgba(255,255,255,.09);
+    --danger:#ef4444;
+    --success:#22c55e;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(99,102,241,.16),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(139,92,246,.12),
+            transparent 35%
+        ),
+        var(--bg);
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+
+/* HEADER */
+
+header{
+    border-bottom:1px solid var(--border);
+    background:rgba(8,9,13,.9);
+    backdrop-filter:blur(15px);
+}
+
+.navbar{
+    width:min(1100px,92%);
+    min-height:68px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:var(--primary);
+}
+
+.home{
+    color:var(--muted);
+    font-size:14px;
+}
+
+.home:hover{
+    color:white;
+}
+
+
+/* LOGIN AREA */
+
+.page{
+    width:min(500px,92%);
+    margin:0 auto;
+    padding:55px 0 70px;
+}
+
+.login-card{
+    background:linear-gradient(
+        180deg,
+        var(--card2),
+        var(--card)
+    );
+
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:30px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.35);
+}
+
+.icon{
+    width:65px;
+    height:65px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+
+    margin-bottom:20px;
+
+    font-size:30px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary2)
+    );
+}
+
+h1{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:var(--muted);
+    line-height:1.6;
+    margin-bottom:28px;
+}
+
+
+/* FORM */
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+input{
+    width:100%;
+
+    padding:14px 15px;
+
+    border-radius:11px;
+
+    border:1px solid var(--border);
+
+    background:#0c0f16;
+
+    color:white;
+
+    outline:none;
+
+    font-size:15px;
+}
+
+input:focus{
+    border-color:var(--primary);
+    box-shadow:
+        0 0 0 3px rgba(139,92,246,.12);
+}
+
+.password-box{
+    position:relative;
+}
+
+.password-box input{
+    padding-right:75px;
+}
+
+.show-password{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+
+    border:0;
+    background:transparent;
+
+    color:var(--muted);
+
+    cursor:pointer;
+
+    font-size:13px;
+}
+
+.show-password:hover{
+    color:white;
+}
+
+
+/* BUTTON */
+
+.login-btn{
+    width:100%;
+
+    border:0;
+
+    padding:14px;
+
+    border-radius:11px;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary2)
+    );
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    margin-top:5px;
+}
+
+.login-btn:hover{
+    opacity:.92;
+}
+
+
+/* MESSAGE */
+
+.message{
+    display:none;
+
+    padding:12px 14px;
+
+    border-radius:10px;
+
+    margin-bottom:18px;
+
+    font-size:14px;
+
+    line-height:1.5;
+}
+
+.message.error{
+    display:block;
+
+    background:rgba(239,68,68,.1);
+
+    border:1px solid rgba(239,68,68,.25);
+
+    color:#fca5a5;
+}
+
+.message.success{
+    display:block;
+
+    background:rgba(34,197,94,.1);
+
+    border:1px solid rgba(34,197,94,.25);
+
+    color:#86efac;
+}
+
+
+/* SWITCH */
+
+.switch{
+    text-align:center;
+
+    margin-top:22px;
+
+    color:var(--muted);
+
+    font-size:14px;
+}
+
+.switch button{
+    border:0;
+    background:none;
+
+    color:#a78bfa;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+
+/* NOTICE */
+
+.demo-notice{
+    margin-top:22px;
+
+    padding:13px;
+
+    border-radius:10px;
+
+    background:rgba(245,158,11,.08);
+
+    border:1px solid rgba(245,158,11,.2);
+
+    color:#fcd34d;
+
+    font-size:12px;
+
+    line-height:1.5;
+}
+
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+
+    border-top:1px solid var(--border);
+
+    padding:25px;
+
+    color:var(--muted);
+
+    font-size:13px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .login-card{
+        padding:24px 20px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<header>
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        GEN<span>-</span>VISUAL
+    </a>
+
+    <a href="index.html" class="home">
+        ← Home
+    </a>
+
+</nav>
+
+</header>
+
+
+<main class="page">
+
+
+<div class="login-card">
+
+    <div class="icon">
+        👤
+    </div>
+
+
+    <h1 id="title">
+        Welcome Back
+    </h1>
+
+
+    <p class="subtitle" id="subtitle">
+        Login to continue reading your GEN-VISUAL stories.
+    </p>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+
+    <!-- LOGIN FORM -->
+
+    <form
+        id="loginForm"
+        onsubmit="login(event)">
+
+
+        <div class="form-group">
+
+            <label for="loginEmail">
+                Email
+            </label>
+
+            <input
+                id="loginEmail"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+            <div class="password-box">
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required>
+
+                <button
+                    type="button"
+                    class="show-password"
+                    onclick="togglePassword('loginPassword')">
+
+                    Show
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="login-btn">
+
+            Login
+
+        </button>
+
+
+    </form>
+
+
+    <!-- SIGN UP FORM -->
+
+    <form
+        id="signupForm"
+        style="display:none;"
+        onsubmit="signup(event)">
+
+
+        <div class="form-group">
+
+            <label for="signupName">
+                Your Name
+            </label>
+
+            <input
+                id="signupName"
+                type="text"
+                placeholder="Your name"
+                autocomplete="name"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="signupEmail">
+                Email
+            </label>
+
+            <input
+                id="signupEmail"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="signupPassword">
+                Password
+            </label>
+
+            <div class="password-box">
+
+                <input
+                    id="signupPassword"
+                    type="password"
+                    placeholder="Create a password"
+                    minlength="6"
+                    required>
+
+                <button
+                    type="button"
+                    class="show-password"
+                    onclick="togglePassword('signupPassword')">
+
+                    Show
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="login-btn">
+
+            Create Account
+
+        </button>
+
+
+    </form>
+
+
+    <div class="switch">
+
+        <span id="switchText">
+            Don't have an account?
+        </span>
+
+        <button
+            type="button"
+            onclick="switchMode()"
+            id="switchButton">
+
+            Create Account
+
+        </button>
+
+    </div>
+
+
+    <div class="demo-notice">
+
+        ⚠️ <strong>Current version:</strong>
+        This is a browser-based demo account system.
+        Your account is stored only on this device/browser.
+        We will replace this with secure online authentication
+        when we connect the website to a real backend.
+
+    </div>
+
+
+</div>
+
+</main>
+
+
+<footer>
+
+    © <span id="year"></span>
+    GEN-VISUAL / RC Visual
+
+</footer>
+
+
+<script>
+
+/* ==========================
+   YEAR
+========================== */
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
+
+
+/* ==========================
+   CHECK EXISTING LOGIN
+========================== */
+
+const existingUser =
+    localStorage.getItem("genvisual-user");
+
+if(existingUser){
+
+    try{
+
+        const user =
+            JSON.parse(existingUser);
+
+        if(user && user.name){
+
+            /*
+              If already logged in,
+              send user to library.
+            */
+
+            window.location.href =
+                "library.html";
+
+        }
+
+    }catch(error){
+
+        console.log(
+            "No valid saved account."
+        );
+
+    }
+
+}
+
+
+/* ==========================
+   LOGIN
+========================== */
+
+function login(event){
+
+    event.preventDefault();
+
+
+    const email =
+        document
+        .getElementById("loginEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+    const savedAccount =
+        localStorage.getItem(
+            "genvisual-account"
+        );
+
+
+    if(!savedAccount){
+
+        showMessage(
+            "No account found on this device. Please create an account first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const account =
+            JSON.parse(savedAccount);
+
+
+        if(
+            account.email === email &&
+            account.password === password
+        ){
+
+            /*
+              This is the key used
+              by library.html
+            */
+
+            localStorage.setItem(
+                "genvisual-user",
+                JSON.stringify({
+
+                    name:account.name,
+                    email:account.email
+
+                })
+            );
+
+
+            showMessage(
+                "Login successful! Opening your library...",
+                "success"
+            );
+
+
+            setTimeout(function(){
+
+                window.location.href =
+                    "library.html";
+
+            },700);
+
+
+        }else{
+
+            showMessage(
+                "Incorrect email or password.",
+                "error"
+            );
+
+        }
+
+
+    }catch(error){
+
+        showMessage(
+            "Unable to read your account. Please create a new account.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ==========================
+   SIGN UP
+========================== */
+
+function signup(event){
+
+    event.preventDefault();
+
+
+    const name =
+        document
+        .getElementById("signupName")
+        .value
+        .trim();
+
+
+    const email =
+        document
+        .getElementById("signupEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+        document
+        .getElementById("signupPassword")
+        .value;
+
+
+    if(name.length < 2){
+
+        showMessage(
+            "Please enter your name.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(password.length < 6){
+
+        showMessage(
+            "Password must contain at least 6 characters.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const account = {
+
+        name:name,
+        email:email,
+        password:password
+
+    };
+
+
+    /*
+      Save demo account.
+    */
+
+    localStorage.setItem(
+        "genvisual-account",
+        JSON.stringify(account)
+    );
+
+
+    /*
+      Automatically log user in.
+    */
+
+    localStorage.setItem(
+        "genvisual-user",
+        JSON.stringify({
+
+            name:name,
+            email:email
+
+        })
+    );
+
+
+    showMessage(
+        "Account created successfully! Opening your library...",
+        "success"
+    );
+
+
+    setTimeout(function(){
+
+        window.location.href =
+            "library.html";
+
+    },700);
+
+}
+
+
+/* ==========================
+   SWITCH LOGIN / SIGNUP
+========================== */
+
+let signupMode = false;
+
+
+function switchMode(){
+
+    signupMode =
+        !signupMode;
+
+
+    const loginForm =
+        document.getElementById(
+            "loginForm"
+        );
+
+
+    const signupForm =
+        document.getElementById(
+            "signupForm"
+        );
+
+
+    const title =
+        document.getElementById(
+            "title"
+        );
+
+
+    const subtitle =
+        document.getElementById(
+            "subtitle"
+        );
+
+
+    const switchText =
+        document.getElementById(
+            "switchText"
+        );
+
+
+    const switchButton =
+        document.getElementById(
+            "switchButton"
+        );
+
+
+    clearMessage();
+
+
+    if(signupMode){
+
+        loginForm.style.display =
+            "none";
+
+        signupForm.style.display =
+            "block";
+
+        title.textContent =
+            "Create Your Account";
+
+        subtitle.textContent =
+            "Create an account to save your GEN-VISUAL reading progress.";
+
+        switchText.textContent =
+            "Already have an account?";
+
+        switchButton.textContent =
+            "Login";
+
+    }else{
+
+        loginForm.style.display =
+            "block";
+
+        signupForm.style.display =
+            "none";
+
+        title.textContent =
+            "Welcome Back";
+
+        subtitle.textContent =
+            "Login to continue reading your GEN-VISUAL stories.";
+
+        switchText.textContent =
+            "Don't have an account?";
+
+        switchButton.textContent =
+            "Create Account";
+
+    }
+
+}
+
+
+/* ==========================
+   PASSWORD VISIBILITY
+========================== */
+
+function togglePassword(id){
+
+    const input =
+        document.getElementById(id);
+
+
+    const button =
+        input.parentElement
+        .querySelector(
+            ".show-password"
+        );
+
+
+    if(input.type === "password"){
+
+        input.type =
+            "text";
+
+        button.textContent =
+            "Hide";
+
+    }else{
+
+        input.type =
+            "password";
+
+        button.textContent =
+            "Show";
+
+    }
+
+}
+
+
+/* ==========================
+   MESSAGE
+========================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.textContent =
+        text;
+
+
+    message.className =
+        "message " + type;
+
+}
+
+
+function clearMessage(){
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.textContent =
+        "";
+
+    message.className =
+        "message";
+
+}
+
+</script>
+
+</body>
+</html>
