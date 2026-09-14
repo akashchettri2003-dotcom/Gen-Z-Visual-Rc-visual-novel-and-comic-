@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<library>
+
+    <novels>
+
+        <book
+            id="beginning"
+            title="The Beginning"
+            genre="Fantasy"
+            price="0"
+            status="Free">
+
+            <description>
+                A mysterious journey begins when an ordinary person discovers a hidden world.
+            </description>
+
+            <author>RC Visual</author>
+
+            <chapter
+                number="1"
+                title="The First Step"
+                access="free">
+                The journey begins here. This is the first chapter of The Beginning.
+            </chapter>
+
+            <chapter
+                number="2"
+                title="The Hidden World"
+                access="paid">
+                The second chapter contains premium content.
+            </chapter>
+
+        </book>
+
+
+        <book
+            id="last-horizon"
+            title="The Last Horizon"
+            genre="Action"
+            price="49"
+            status="Coming Soon">
+
+            <description>
+                A powerful adventure beyond the limits of the known world.
+            </description>
+
+            <author>RC Visual</author>
+
+        </book>
+
+
+        <book
+            id="unknown"
+            title="Unknown"
+            genre="Mystery"
+            price="29"
+            status="Coming Soon">
+
+            <description>
+                Some mysteries are better left unsolved.
+            </description>
+
+            <author>RC Visual</author>
+
+        </book>
+
+    </novels>
+
+
+    <comics>
+
+        <comic
+            id="first-chapter"
+            title="First Chapter"
+            genre="Action"
+            price="0"
+            status="Free">
+
+            <description>
+                Enter a new world where every battle reveals another secret.
+            </description>
+
+            <episode
+                number="1"
+                title="Awakening"
+                access="free">
+                Comic Episode 1
+            </episode>
+
+        </comic>
+
+
+        <comic
+            id="new-world"
+            title="New World"
+            genre="Fantasy"
+            price="39"
+            status="Coming Soon">
+
+            <description>
+                A completely new world awaits beyond the mysterious gateway.
+            </description>
+
+        </comic>
+
+
+        <comic
+            id="future-series"
+            title="Future Series"
+            genre="Sci-Fi"
+            price="49"
+            status="Coming Soon">
+
+            <description>
+                Humanity faces its greatest challenge in the distant future.
+            </description>
+
+        </comic>
+
+    </comics>
+
+</library>
