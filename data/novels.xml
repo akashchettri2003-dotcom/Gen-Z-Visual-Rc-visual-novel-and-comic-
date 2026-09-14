@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<novels>
+
+    <novel
+        id="the-beginning"
+        title="The Beginning"
+        genre="Fantasy"
+        price="0"
+        status="Free">
+
+        <cover>assets/covers/the-beginning.jpg</cover>
+
+        <description>
+            A mysterious beginning leads a young hero into a world
+            filled with magic, secrets and forgotten powers.
+        </description>
+
+        <chapters>
+
+            <chapter
+                id="1"
+                title="The First Step"
+                access="free">
+            </chapter>
+
+            <chapter
+                id="2"
+                title="The Hidden Secret"
+                access="paid"
+                price="19">
+            </chapter>
+
+            <chapter
+                id="3"
+                title="The Awakening"
+                access="paid"
+                price="19">
+            </chapter>
+
+        </chapters>
+
+    </novel>
+
+
+    <novel
+        id="the-last-horizon"
+        title="The Last Horizon"
+        genre="Action"
+        price="49"
+        status="Coming Soon">
+
+        <cover>assets/covers/the-last-horizon.jpg</cover>
+
+        <description>
+            A dangerous journey begins beyond the last known horizon.
+        </description>
+
+        <chapters>
+
+            <chapter
+                id="1"
+                title="Beyond the Horizon"
+                access="paid"
+                price="19">
+            </chapter>
+
+        </chapters>
+
+    </novel>
+
+
+    <novel
+        id="unknown"
+        title="Unknown"
+        genre="Mystery"
+        price="29"
+        status="Coming Soon">
+
+        <cover>assets/covers/unknown.jpg</cover>
+
+        <description>
+            Nobody knows who left the mysterious message.
+        </description>
+
+        <chapters>
+
+            <chapter
+                id="1"
+                title="The Message"
+                access="paid"
+                price="19">
+            </chapter>
+
+        </chapters>
+
+    </novel>
+
+</novels>
