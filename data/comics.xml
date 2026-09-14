@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<comics>
+
+    <comic
+        id="first-chapter"
+        title="First Chapter"
+        genre="Action"
+        price="0"
+        status="Free">
+
+        <cover>assets/comics/first-chapter.jpg</cover>
+
+        <description>
+            The journey begins with an unexpected battle.
+        </description>
+
+        <episodes>
+
+            <episode
+                id="1"
+                title="The Beginning"
+                access="free">
+            </episode>
+
+            <episode
+                id="2"
+                title="The First Battle"
+                access="paid"
+                price="19">
+            </episode>
+
+        </episodes>
+
+    </comic>
+
+
+    <comic
+        id="new-world"
+        title="New World"
+        genre="Fantasy"
+        price="49"
+        status="Coming Soon">
+
+        <cover>assets/comics/new-world.jpg</cover>
+
+        <description>
+            A mysterious portal opens to a completely different world.
+        </description>
+
+        <episodes>
+
+            <episode
+                id="1"
+                title="The Portal"
+                access="paid"
+                price="19">
+            </episode>
+
+        </episodes>
+
+    </comic>
+
+</comics>
