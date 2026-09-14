@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Reader — GEN-VISUAL</title>
+
+<meta name="description"
+      content="Read stories and comics on GEN-VISUAL / RC Visual.">
+
+<style>
+
+:root{
+    --bg:#08090d;
+    --reader:#10131b;
+    --card:#171b25;
+    --text:#f5f7ff;
+    --muted:#9da5b8;
+    --primary:#8b5cf6;
+    --primary2:#6366f1;
+    --border:rgba(255,255,255,.09);
+    --max:850px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(99,102,241,.10),
+            transparent 35%
+        ),
+        var(--bg);
+
+    color:var(--text);
+    min-height:100vh;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button,
+select{
+    font:inherit;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    background:rgba(8,9,13,.90);
+
+    backdrop-filter:blur(16px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.navbar{
+    min-height:65px;
+
+    width:min(1100px,92%);
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+.logo{
+    font-size:21px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:var(--primary);
+}
+
+.back{
+    color:var(--muted);
+
+    font-size:14px;
+
+    padding:9px 13px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    transition:.2s;
+}
+
+.back:hover{
+    color:white;
+
+    border-color:rgba(139,92,246,.5);
+}
+
+
+/* =========================
+   READING PROGRESS
+========================= */
+
+.progress-container{
+    position:fixed;
+
+    top:65px;
+    left:0;
+
+    width:100%;
+
+    height:3px;
+
+    z-index:999;
+
+    background:transparent;
+}
+
+.progress-bar{
+    height:100%;
+
+    width:0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--primary2)
+        );
+
+    transition:width .1s;
+}
+
+
+/* =========================
+   READER TOP
+========================= */
+
+.reader-header{
+    width:min(var(--max),92%);
+
+    margin:55px auto 25px;
+
+    text-align:center;
+}
+
+.reader-type{
+    display:inline-block;
+
+    font-size:11px;
+
+    letter-spacing:1.5px;
+
+    text-transform:uppercase;
+
+    color:#c4b5fd;
+
+    background:rgba(139,92,246,.12);
+
+    border:1px solid rgba(139,92,246,.25);
+
+    padding:7px 12px;
+
+    border-radius:999px;
+
+    margin-bottom:15px;
+}
+
+.reader-header h1{
+    font-size:
+        clamp(30px,6vw,48px);
+
+    line-height:1.1;
+
+    margin-bottom:10px;
+}
+
+.reader-header p{
+    color:var(--muted);
+
+    font-size:14px;
+}
+
+
+/* =========================
+   READER CONTROLS
+========================= */
+
+.controls{
+    width:min(var(--max),92%);
+
+    margin:0 auto 25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    padding:12px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+}
+
+.control-group{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    flex-wrap:wrap;
+}
+
+.control-btn{
+    border:1px solid var(--border);
+
+    background:#11141c;
+
+    color:#dce0ea;
+
+    padding:8px 11px;
+
+    border-radius:9px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.control-btn:hover{
+    border-color:rgba(139,92,246,.5);
+
+    color:white;
+}
+
+.control-btn:disabled{
+    opacity:.4;
+
+    cursor:not-allowed;
+}
+
+.chapter-select{
+    background:#11141c;
+
+    color:white;
+
+    border:1px solid var(--border);
+
+    border-radius:9px;
+
+    padding:8px;
+
+    outline:none;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   READER
+========================= */
+
+.reader{
+    width:min(var(--max),92%);
+
+    margin:auto;
+
+    padding:45px clamp(18px,5vw,60px);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(23,27,37,.95),
+            rgba(16,19,27,.95)
+        );
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.25);
+}
+
+
+/* =========================
+   NOVEL CONTENT
+========================= */
+
+.chapter-label{
+    color:#a78bfa;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+}
+
+.reader h2{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(28px,5vw,40px);
+
+    margin-bottom:25px;
+
+    line-height:1.2;
+}
+
+.reader p{
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    color:#e5e7ef;
+
+    margin-bottom:22px;
+}
+
+.dropcap::first-letter{
+    font-size:3.4em;
+
+    float:left;
+
+    line-height:.8;
+
+    padding-right:7px;
+
+    color:#a78bfa;
+
+    font-weight:bold;
+}
+
+
+/* =========================
+   COMIC MODE
+========================= */
+
+.comic-reader{
+    display:none;
+
+    text-align:center;
+}
+
+.comic-page{
+    width:100%;
+
+    min-height:300px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:30px;
+
+    margin-bottom:20px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #312e81,
+            #7c3aed
+        );
+
+    border:1px solid var(--border);
+}
+
+.comic-page-content{
+    font-size:
+        clamp(28px,7vw,65px);
+
+    font-weight:900;
+
+    line-height:1.1;
+
+    text-shadow:
+        0 8px 30px rgba(0,0,0,.4);
+}
+
+
+/* =========================
+   BOOKMARK
+========================= */
+
+.bookmark-area{
+    width:min(var(--max),92%);
+
+    margin:20px auto;
+
+    text-align:center;
+}
+
+.bookmark-btn{
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:#d9dce5;
+
+    padding:11px 17px;
+
+    border-radius:11px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.bookmark-btn:hover{
+    border-color:rgba(139,92,246,.5);
+
+    color:white;
+}
+
+.bookmark-btn.saved{
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary2)
+        );
+
+    border-color:transparent;
+
+    color:white;
+}
+
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+
+.chapter-navigation{
+    width:min(var(--max),92%);
+
+    margin:30px auto 60px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+}
+
+.nav-chapter{
+    padding:16px;
+
+    border-radius:14px;
+
+    border:1px solid var(--border);
+
+    background:var(--card);
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.nav-chapter:hover{
+    border-color:rgba(139,92,246,.5);
+
+    transform:translateY(-2px);
+}
+
+.nav-chapter.next{
+    text-align:right;
+}
+
+.nav-small{
+    display:block;
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-bottom:5px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+}
+
+.nav-title{
+    font-weight:bold;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    border-top:1px solid var(--border);
+
+    padding:30px 0;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    text-align:center;
+}
+
+
+/* =========================
+   LIGHT READING MODE
+========================= */
+
+body.light-reader{
+    background:#eeeef2;
+
+    color:#15161a;
+}
+
+body.light-reader header{
+    background:rgba(255,255,255,.9);
+
+    border-color:rgba(0,0,0,.1);
+}
+
+body.light-reader .logo{
+    color:#111;
+}
+
+body.light-reader .back{
+    color:#444;
+
+    border-color:rgba(0,0,0,.15);
+}
+
+body.light-reader .reader{
+    background:#fff;
+
+    border-color:rgba(0,0,0,.08);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.1);
+}
+
+body.light-reader .reader p{
+    color:#292929;
+}
+
+body.light-reader .controls,
+body.light-reader .bookmark-btn,
+body.light-reader .nav-chapter{
+    background:#fff;
+
+    color:#222;
+
+    border-color:rgba(0,0,0,.1);
+}
+
+body.light-reader .control-btn,
+body.light-reader .chapter-select{
+    background:#f3f3f5;
+
+    color:#222;
+
+    border-color:rgba(0,0,0,.1);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .navbar{
+        min-height:60px;
+    }
+
+    .progress-container{
+        top:60px;
+    }
+
+    .reader-header{
+        margin-top:40px;
+    }
+
+    .controls{
+        align-items:stretch;
+    }
+
+    .control-group{
+        width:100%;
+    }
+
+    .control-btn,
+    .chapter-select{
+        flex:1;
+    }
+
+    .reader{
+        padding:
+            32px
+            18px;
+    }
+
+    .reader p{
+        font-size:17px;
+
+        line-height:1.85;
+    }
+
+    .chapter-navigation{
+        grid-template-columns:1fr;
+    }
+
+    .nav-chapter.next{
+        text-align:left;
+    }
+
+    .comic-page{
+        min-height:240px;
+
+        padding:20px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+<nav class="navbar">
+
+    <a href="index.html" class="logo">
+        GEN<span>-</span>VISUAL
+    </a>
+
+    <a href="javascript:history.back()" class="back">
+        ← Back
+    </a>
+
+</nav>
+
+</header>
+
+
+<!-- PROGRESS -->
+
+<div class="progress-container">
+
+    <div
+        class="progress-bar"
+        id="progressBar">
+    </div>
+
+</div>
+
+
+<!-- =========================
+     READER HEADER
+========================= -->
+
+<section class="reader-header">
+
+    <div
+        class="reader-type"
+        id="readerType">
+        NOVEL
+    </div>
+
+    <h1 id="bookTitle">
+        The Beginning
+    </h1>
+
+    <p id="chapterInfo">
+        Chapter 1
+    </p>
+
+</section>
+
+
+<!-- =========================
+     CONTROLS
+========================= -->
+
+<section class="controls">
+
+    <div class="control-group">
+
+        <button
+            class="control-btn"
+            onclick="changeFontSize(-1)">
+            A−
+        </button>
+
+        <button
+            class="control-btn"
+            onclick="changeFontSize(1)">
+            A+
+        </button>
+
+        <button
+            class="control-btn"
+            onclick="toggleReaderMode()">
+            ☀ Mode
+        </button>
+
+    </div>
+
+
+    <div class="control-group">
+
+        <select
+            class="chapter-select"
+            id="chapterSelect"
+            onchange="changeChapter(this.value)">
+
+            <option value="1">
+                Chapter 1
+            </option>
+
+            <option value="2">
+                Chapter 2
+            </option>
+
+            <option value="3">
+                Chapter 3
+            </option>
+
+        </select>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     READER CONTENT
+========================= -->
+
+<main class="reader" id="novelReader">
+
+    <div
+        class="chapter-label"
+        id="chapterLabel">
+        CHAPTER 1
+    </div>
+
+
+    <h2 id="chapterTitle">
+        The Beginning
+    </h2>
+
+
+    <p class="dropcap">
+        Every story begins with a single moment.
+        Sometimes that moment looks ordinary.
+        Sometimes it changes everything.
+    </p>
+
+
+    <p>
+        The sky was unusually quiet that evening.
+        The village had already begun to disappear
+        beneath the shadows of the surrounding mountains.
+    </p>
+
+
+    <p>
+        Nobody noticed the strange light in the distance.
+        Nobody except one person.
+    </p>
+
+
+    <p>
+        Standing at the edge of the old forest,
+        the young traveler watched the light grow
+        brighter with every passing second.
+    </p>
+
+
+    <p>
+        There was something familiar about it.
+        Something that made the traveler feel as if
+        this moment had happened before.
+    </p>
+
+
+    <p>
+        Then the light vanished.
+    </p>
+
+
+    <p>
+        And the world changed.
+    </p>
+
+
+    <p>
+        <strong>
+            This is only a sample preview.
+            Your real chapter content can be placed here later.
+        </strong>
+    </p>
+
+</main>
+
+
+<!-- =========================
+     COMIC READER
+========================= -->
+
+<main
+    class="reader comic-reader"
+    id="comicReader">
+
+    <div class="chapter-label">
+        COMIC EPISODE 1
+    </div>
+
+    <h2 id="comicTitle">
+        First Chapter
+    </h2>
+
+
+    <div class="comic-page">
+
+        <div class="comic-page-content">
+            FIRST<br>
+            CHAPTER
+        </div>
+
+    </div>
+
+
+    <p>
+        Your actual comic pages will be displayed here.
+        Later you can replace these panels with your
+        uploaded comic artwork.
+    </p>
+
+
+    <div class="comic-page">
+
+        <div class="comic-page-content">
+            THE<br>
+            STORY<br>
+            BEGINS
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- =========================
+     BOOKMARK
+========================= -->
+
+<div class="bookmark-area">
+
+    <button
+        class="bookmark-btn"
+        id="bookmarkBtn"
+        onclick="toggleBookmark()">
+
+        🔖 Bookmark Chapter
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     CHAPTER NAVIGATION
+========================= -->
+
+<section class="chapter-navigation">
+
+
+    <button
+        class="nav-chapter"
+        id="previousBtn"
+        onclick="previousChapter()">
+
+        <span class="nav-small">
+            Previous
+        </span>
+
+        <span class="nav-title">
+            ← Previous Chapter
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-chapter next"
+        id="nextBtn"
+        onclick="nextChapter()">
+
+        <span class="nav-small">
+            Next
+        </span>
+
+        <span class="nav-title">
+            Next Chapter →
+        </span>
+
+    </button>
+
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © <span id="year"></span>
+    GEN-VISUAL / RC Visual
+
+</footer>
+
+
+<script>
+
+/* =====================================
+   GET URL PARAMETERS
+===================================== */
+
+const params =
+    new URLSearchParams(window.location.search);
+
+const book =
+    params.get("book");
+
+const comic =
+    params.get("comic");
+
+let chapter =
+    parseInt(params.get("chapter")) || 1;
+
+
+/* =====================================
+   READER TYPE
+===================================== */
+
+const isComic =
+    !!comic;
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+const bookTitle =
+    document.getElementById("bookTitle");
+
+const chapterInfo =
+    document.getElementById("chapterInfo");
+
+const readerType =
+    document.getElementById("readerType");
+
+const novelReader =
+    document.getElementById("novelReader");
+
+const comicReader =
+    document.getElementById("comicReader");
+
+const chapterSelect =
+    document.getElementById("chapterSelect");
+
+const previousBtn =
+    document.getElementById("previousBtn");
+
+const nextBtn =
+    document.getElementById("nextBtn");
+
+const bookmarkBtn =
+    document.getElementById("bookmarkBtn");
+
+const progressBar =
+    document.getElementById("progressBar");
+
+
+/* =====================================
+   SAMPLE CONTENT
+===================================== */
+
+const chapters = {
+
+    1:{
+        title:"The Beginning",
+
+        content:`
+        <p class="dropcap">
+        Every story begins with a single moment.
+        Sometimes that moment looks ordinary.
+        Sometimes it changes everything.
+        </p>
+
+        <p>
+        The sky was unusually quiet that evening.
+        The village had already begun to disappear
+        beneath the shadows of the surrounding mountains.
+        </p>
+
+        <p>
+        Nobody noticed the strange light in the distance.
+        Nobody except one person.
+        </p>
+
+        <p>
+        Standing at the edge of the old forest,
+        the young traveler watched the light grow
+        brighter with every passing second.
+        </p>
+
+        <p>
+        There was something familiar about it.
+        Something that made the traveler feel as if
+        this moment had happened before.
+        </p>
+
+        <p>
+        Then the light vanished.
+        </p>
+
+        <p>
+        And the world changed.
+        </p>
+
+        <p>
+        <strong>
+        This is a sample preview of Chapter 1.
+        Replace this text with your actual novel chapter.
+        </strong>
+        </p>
+        `
+    },
+
+
+    2:{
+        title:"The First Step",
+
+        content:`
+        <p class="dropcap">
+        The morning arrived without warning.
+        </p>
+
+        <p>
+        Everything looked normal, but the traveler
+        knew something had changed during the night.
+        </p>
+
+        <p>
+        The forest was silent.
+        The mountains were covered in mist.
+        </p>
+
+        <p>
+        Yet somewhere beyond the trees,
+        something was waiting.
+        </p>
+
+        <p>
+        The traveler took the first step forward.
+        </p>
+
+        <p>
+        There would be no turning back.
+        </p>
+        `
+    },
+
+
+    3:{
+        title:"The Unknown",
+
+        content:`
+        <p class="dropcap">
+        The deeper the traveler went,
+        the less familiar the world became.
+        </p>
+
+        <p>
+        Strange symbols appeared on the trees.
+        None of them had been there before.
+        </p>
+
+        <p>
+        Then a voice came from the darkness.
+        </p>
+
+        <p>
+        "You finally arrived."
+        </p>
+
+        <p>
+        The traveler stopped.
+        </p>
+
+        <p>
+        There was nobody there.
+        </p>
+        `
+    }
+
+};
+
+
+/* =====================================
+   INITIALIZE
+===================================== */
+
+function initializeReader(){
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+
+    if(isComic){
+
+        readerType.textContent =
+            "COMIC";
+
+        bookTitle.textContent =
+            "First Chapter";
+
+        chapterInfo.textContent =
+            "Episode " + chapter;
+
+        novelReader.style.display =
+            "none";
+
+        comicReader.style.display =
+            "block";
+
+        chapterSelect.value =
+            String(chapter);
+
+    }else{
+
+        readerType.textContent =
+            "NOVEL";
+
+        if(book === "the-beginning"){
+
+            bookTitle.textContent =
+                "The Beginning";
+
+        }else{
+
+            bookTitle.textContent =
+                "GEN-VISUAL";
+
+        }
+
+        novelReader.style.display =
+            "block";
+
+        comicReader.style.display =
+            "none";
+
+        loadChapter(chapter);
+
+    }
+
+
+    updateNavigation();
+
+    updateBookmark();
+
+}
+
+
+/* =====================================
+   LOAD NOVEL CHAPTER
+===================================== */
+
+function loadChapter(number){
+
+    chapter =
+        parseInt(number) || 1;
+
+    const data =
+        chapters[chapter];
+
+    if(!data){
+
+        chapter = 1;
+
+        return loadChapter(1);
+
+    }
+
+
+    document.getElementById("chapterLabel").textContent =
+        "CHAPTER " + chapter;
+
+
+    document.getElementById("chapterTitle").textContent =
+        data.title;
+
+
+    novelReader.innerHTML = `
+
+        <div
+            class="chapter-label"
+            id="chapterLabel">
+            CHAPTER ${chapter}
+        </div>
+
+        <h2 id="chapterTitle">
+            ${data.title}
+        </h2>
+
+        ${data.content}
+
+    `;
+
+
+    chapterInfo.textContent =
+        "Chapter " + chapter;
+
+
+    chapterSelect.value =
+        String(chapter);
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+
+    saveProgress();
+
+    updateNavigation();
+
+    updateBookmark();
+
+}
+
+
+/* =====================================
+   CHANGE CHAPTER
+===================================== */
+
+function changeChapter(value){
+
+    const selected =
+        parseInt(value);
+
+    if(isComic){
+
+        chapter =
+            selected;
+
+        chapterInfo.textContent =
+            "Episode " + chapter;
+
+        updateNavigation();
+
+        saveProgress();
+
+        return;
+    }
+
+    loadChapter(selected);
+
+}
+
+
+/* =====================================
+   PREVIOUS
+===================================== */
+
+function previousChapter(){
+
+    if(chapter > 1){
+
+        if(isComic){
+
+            chapter--;
+
+            chapterInfo.textContent =
+                "Episode " + chapter;
+
+            updateNavigation();
+
+        }else{
+
+            loadChapter(chapter - 1);
+
+        }
+
+    }
+
+}
+
+
+/* =====================================
+   NEXT
+===================================== */
+
+function nextChapter(){
+
+    if(chapter < 3){
+
+        if(isComic){
+
+            chapter++;
+
+            chapterInfo.textContent =
+                "Episode " + chapter;
+
+            updateNavigation();
+
+        }else{
+
+            loadChapter(chapter + 1);
+
+        }
+
+    }else{
+
+        alert(
+            "You have reached the latest available chapter."
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   NAVIGATION BUTTONS
+===================================== */
+
+function updateNavigation(){
+
+    previousBtn.disabled =
+        chapter <= 1;
+
+
+    nextBtn.disabled =
+        chapter >= 3;
+
+}
+
+
+/* =====================================
+   FONT SIZE
+===================================== */
+
+let fontSize = 18;
+
+
+function changeFontSize(amount){
+
+    fontSize += amount;
+
+    if(fontSize < 14)
+        fontSize = 14;
+
+    if(fontSize > 26)
+        fontSize = 26;
+
+
+    document.querySelectorAll(
+        ".reader p"
+    ).forEach(p => {
+
+        p.style.fontSize =
+            fontSize + "px";
+
+    });
+
+}
+
+
+/* =====================================
+   READING MODE
+===================================== */
+
+function toggleReaderMode(){
+
+    document.body.classList.toggle(
+        "light-reader"
+    );
+
+}
+
+
+/* =====================================
+   BOOKMARK
+===================================== */
+
+function getBookmarkKey(){
+
+    return (
+        "genvisual-bookmark-" +
+        (book || comic || "default")
+        + "-" +
+        chapter
+    );
+
+}
+
+
+function toggleBookmark(){
+
+    const key =
+        getBookmarkKey();
+
+    const saved =
+        localStorage.getItem(key);
+
+
+    if(saved){
+
+        localStorage.removeItem(key);
+
+    }else{
+
+        localStorage.setItem(
+            key,
+            "saved"
+        );
+
+    }
+
+
+    updateBookmark();
+
+}
+
+
+function updateBookmark(){
+
+    const key =
+        getBookmarkKey();
+
+    const saved =
+        localStorage.getItem(key);
+
+
+    if(saved){
+
+        bookmarkBtn.textContent =
+            "✓ Bookmarked";
+
+        bookmarkBtn.classList.add(
+            "saved"
+        );
+
+    }else{
+
+        bookmarkBtn.textContent =
+            "🔖 Bookmark Chapter";
+
+        bookmarkBtn.classList.remove(
+            "saved"
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   SAVE READING PROGRESS
+===================================== */
+
+function saveProgress(){
+
+    localStorage.setItem(
+        "genvisual-progress-" +
+        (book || comic || "default"),
+        String(chapter)
+    );
+
+}
+
+
+/* =====================================
+   READING PROGRESS BAR
+===================================== */
+
+window.addEventListener(
+    "scroll",
+    updateReadingProgress
+);
+
+
+function updateReadingProgress(){
+
+    const scrollTop =
+        window.scrollY;
+
+    const documentHeight =
+        document.documentElement.scrollHeight
+        -
+        window.innerHeight;
+
+
+    if(documentHeight <= 0){
+
+        progressBar.style.width =
+            "100%";
+
+        return;
+
+    }
+
+
+    const percentage =
+        (scrollTop / documentHeight) * 100;
+
+
+    progressBar.style.width =
+        Math.min(100,percentage) + "%";
+
+}
+
+
+/* =====================================
+   START
+===================================== */
+
+initializeReader();
+
+</script>
+
+</body>
+  </html>
